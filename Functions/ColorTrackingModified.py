@@ -378,7 +378,7 @@ class ColorTrackingMod:
         return img
 
 if __name__ == '__main__':
-    run_func = ColorTrackingMod()
+    run_func = ColorTrackingMod
     run_func.init()
     run_func.t()
     __target_color = ('red', )
