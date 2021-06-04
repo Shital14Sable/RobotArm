@@ -69,12 +69,13 @@ if __name__ == '__main__':
             frame = img.copy()
             Frame = run(frame)           
             cv2.imshow('Frame', Frame)
+            result1 = AK.setPitchRangeMoving((0, 20, 5), -90, -90, 0, 100)
+            print(result1)
+            time.sleep(1)
+            result2 = AK.setPitchRangeMoving((2, 20, 5), -90, -90, 0, 100)
+            print(result2)
             key = cv2.waitKey(1)
             if key == 27:
                 break
 
-    result1 = AK.setPitchRangeMoving((0, 20, 5), -90, -90, 0, 100)
-    print(result1)
-    time.sleep(1)
-    result2 = AK.setPitchRangeMoving((2, 20, 5), -90, -90, 0, 100)
-    print(result2)
+    
