@@ -22,15 +22,18 @@ class Segmentation:
         self.servo1 = 500
     
     def straight_line(self, point1, point2):
-        result1 = AK.setPitchRangeMoving(point1, -90, -90, 0, 100)
+        result1 = self.AK.setPitchRangeMoving(point1, -90, -90, 0, 100)
         time.sleep(1)
-        zp = point1[3]
-        dist_1 = np.sqrt((point2[2]-point1[2])^2 +  (point2[1]-point1[1])^2)
-        for i in range(10):
-            xp = point1[1] + 0.1(point2[1]-point1[1])
-            yp = point1[2] + 0.1(point2[1]-point1[1])
-            result2 = AK.setPitchRangeMoving((xp, yp, zp), -90, -90, 0, 100)
+        zp = point1[2]
+        print(zp)
+        segments = 10
+        for i in range(segments):
+            xp = point1[0] + (1/(segments-i))*(point2[0]-point1[0])
+            print(xp)
+            yp = point1[1] + (1/(segments-i))*(point2[1]-point1[1])
+            result2 = self.AK.setPitchRangeMoving((xp, yp, zp), -90, -90, 0, 100)
             time.sleep(0.5)
+            point1 = (xp, yp, zp)
             
     
  #   def small_sem_cir(self, point1, point2, cir_dir):
