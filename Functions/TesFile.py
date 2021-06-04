@@ -22,3 +22,5 @@ AK = ArmIK()
 
 if __name__ == '__main__':
     AK.setPitchRangeMoving((0, 0 - 2, 5), -90, -90, 0, 20)
+    time.sleep(1)
+    AK.setPitchRangeMoving((20, 20 - 2, 5), -90, -90, 0, 20)
