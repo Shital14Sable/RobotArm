@@ -19,4 +19,6 @@ if sys.version_info.major == 2:
 
 AK = ArmIK()
 
-AK.setPitchRangeMoving((0, 0 - 2, 5), -90, -90, 0, 20)
+
+if __name__ == '__main__':
+    AK.setPitchRangeMoving((0, 0 - 2, 5), -90, -90, 0, 20)
