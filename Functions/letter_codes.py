@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# coding=utf8
+
 from Segmentation import Segmentation
 from ArmIK.ArmMoveIK import *
 import time
@@ -47,15 +50,15 @@ def letter_B(start_point, height, width):
     point_list1 = seg1.straight_line(start_point, end_pt1)
     set_pts.extend(point_list1)
     
-    end_pt2 = (end_pt1[0] - 1, end_pt1[1], end_pt1[2])
+    end_pt2 = (end_pt1[0] - width, end_pt1[1], end_pt1[2])
     point_list2 = seg1.straight_line(end_pt1, end_pt2)
     set_pts.extend(list(point_list2))
     
     end_pt3 = (end_pt2[0], end_pt2[1] + height/2, end_pt2[2])
-    point_list3 = seg1.small_sem_cir(end_pt2, end_pt3,1)
+    point_list3 = seg1.straight_line(end_pt2, end_pt3)
     set_pts.extend(list(point_list3))
     
-    end_pt4 = (end_pt3[0] + 1, end_pt3[1], end_pt3[2])
+    end_pt4 = (end_pt3[0] + width, end_pt3[1], end_pt3[2])
     point_list4 = seg1.straight_line(end_pt3, end_pt4)
     set_pts.extend(list(point_list4))
     
@@ -63,7 +66,7 @@ def letter_B(start_point, height, width):
     time.sleep(0.5)
     
     end_pt5 = (end_pt3[0], end_pt3[1] + height/2, end_pt3[2])
-    point_list5 = seg1.small_sem_cir(end_pt3, end_pt5, 1)
+    point_list5 = seg1.straight_line(end_pt3, end_pt5)
     set_pts.extend(list(point_list5))
     
     point_list6 = seg1.straight_line(end_pt5,start_point)
@@ -86,6 +89,4 @@ if __name__ == '__main__':
     AK.setPitchRangeMoving((0, 20, 8), -90, -90, 0, 100)
     point_listx, point_listy = seg1.generate_semicircle(0, 20, 8, 3, 1)
     print(point_listy)
-    
-    
     
