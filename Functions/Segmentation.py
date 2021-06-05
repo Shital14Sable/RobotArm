@@ -29,12 +29,11 @@ class Segmentation:
     def straight_line(self, point1, point2):
         zp = point1[2]
         plt_pts = []
-        plt_pts.append(list(point1))
         for i in range(self.segments):
             xp = point1[0] + (1/(self.segments-i))*(point2[0]-point1[0])
             yp = point1[1] + (1/(self.segments-i))*(point2[1]-point1[1])
-            result2 = self.AK.setPitchRangeMoving((xp, yp, zp), -90, -90, 0, 100)
-            time.sleep(0.5)
+            #result2 = self.AK.setPitchRangeMoving((xp, yp, zp), -90, -90, 0, 100)
+            #time.sleep(0.5)
             point1 = (xp, yp, zp)
             plt_pts.append(list(point1))
         return plt_pts
