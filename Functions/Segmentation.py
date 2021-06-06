@@ -15,10 +15,10 @@ if sys.version_info.major == 2:
 
 
 class Segmentation:
-    def __init__(self):
+    def __init__(self, segments=10):
         self.AK = ArmIK()
         self.servo1 = 500
-        self.segments = 10
+        self.segments = segments
     
     def code_initialize(self):
         Board.setBusServoPulse(1, self.servo1 - 200, 500)  # Open the paws and put down $

@@ -14,8 +14,6 @@ if sys.version_info.major == 2:
     sys.exit(0)
 
 
-
-
 class Segmentation:
     def __init__(self):
         self.AK = ArmIK()
@@ -27,11 +25,12 @@ class Segmentation:
         zp = point1[2]
         print(zp)
         segments = 10
+        plt_points = []
         for i in range(segments):
             xp = point1[0] + (1/(segments-i))*(point2[0]-point1[0])
             print(xp)
             yp = point1[1] + (1/(segments-i))*(point2[1]-point1[1])
-            result2 = self.AK.setPitchRangeMoving((xp, yp, zp), -90, -90, 0, 10$
+            result2 = self.AK.setPitchRangeMoving((xp, yp, zp), -90, -90, 0, 10)
             time.sleep(0.5)
             point1 = (xp, yp, zp)
         return None

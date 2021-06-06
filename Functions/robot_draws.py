@@ -36,7 +36,7 @@ def loop_through_letters(new_dict):
         for row in new_dict[key][2]:  
             print(new_dict[key][0], row)
             # move
-            AK.setPitchRangeMoving(tuple(row), -90, -90, 0, 100)
+            AK.setPitchRangeMoving(tuple(row), -90, -90, 0, 80)
             # delay
             time.sleep(0.2)
         #delay
