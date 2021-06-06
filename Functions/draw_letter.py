@@ -24,6 +24,7 @@ class Draw:
                 |                |
                 |._______________|
         (x1, y1)
+
         :param  letter_limits: (breadth, ratio, (x, y, z) Bounding box inside which every letter will be written.
         breadth = breadth of box (cms), ratio = length:breadth, (x, y, z): Origin coordinates of bounding box (in terms of
         world coordinates)
@@ -103,7 +104,7 @@ class Draw:
         self.make_input_coords_dict()
         self.det_coords_all_letters()
         for i in range(0, self.num_of_chars):
-            start_coords = [self.all_coords_dict[i][1][0], self.all_coords_dict[i][1][1], self.letter_origin[2]]
+            start_coords = [self.all_coords_dict[i][1][0], self.all_coords_dict[i][1][1], 0]
             add_to_array = np.asarray(start_coords) - np.asarray(self.letter_origin)
             new_array = np.asarray(self.local_coords_dict[self.list_of_chars[i]]) + add_to_array
             # new_array = letter_array[i] + add_to_array
@@ -113,16 +114,20 @@ class Draw:
 
     def make_input_coords_dict(self):
         for letter in self.list_of_chars:
-            if path.exists("Letters/letter_{}.npy".format(letter)):
-                char_coords = np.load("Letters/letter_{}.npy".format(letter))
-                print("CHAR LOADED IN:", letter)
+            print("LETTER: ", letter)
+            fname = "/Users/asar/Desktop/ROB521/Project/ROB521-ArmWrite/Letters/letter_{}.npy".format(letter)
+            if path.exists(fname):
+                char_coords = np.load(fname)
+                print("CHAR LOADED IN:", letter, fname)
                 self.local_coords_dict.update({letter: char_coords})
+            else:
+                print("WTH?", fname)
 
 
 if __name__ == '__main__':
     word_to_draw = user_input.take_user_input()
     workspace_limits = [(-15, 12), (15, 28)]
-    letter_bounding_box = (3.5, 1.6571, (0, 20, 8))
+    letter_bounding_box = (3, 5/3, (0, 20, 8))
     gap_btw_letters = 1
     distance_from_boundaries = (3, 5)
 
