@@ -199,6 +199,51 @@ class Letters:
         set_pts.extend(list(line5))
 
         return np.asarray(set_pts)
+
+    def letter_N(self, start_point):
+        set_pts = []
+        set_pts.append(list(start_point))
+        z = start_point[2]
+
+        end_pt1 = (start_point[0], start_point[1] - self.height, z)
+        end_pt2 = (end_pt1[0] - self.width, end_pt1[1] + self.height, z)
+        end_pt3 = (end_pt2[0],  end_pt2[1] - self.height, z)
+
+        line1 = self.seg1.straight_line(start_point, end_pt1)
+        set_pts.extend(list(line1))
+
+        line2 = self.seg1.straight_line(end_pt1, end_pt2)
+        set_pts.extend(list(line2))
+
+        line3 = self.seg1.straight_line(end_pt2, end_pt3)
+        set_pts.extend(list(line3))
+
+    def letter_J(self, start_point):
+        set_pts = []
+        z = start_point[2]
+        start_point = (start_point[0], start_point[1] - self.height, z)
+        set_pts.append(list(start_point))
+
+        end_pt1 = (start_point[0] - self.width, start_point[1], z)
+        end_pt2 = (start_point[0] + self.width/2, start_point[1], z)
+        end_pt3 = (end_pt2[0],  end_pt2[1] + self.height, z)
+        end_pt4 = (end_pt3[0] - self.width/2, end_pt3[1], z)
+        end_pt5 = (end_pt4[0], end_pt4[1] - self.height/2, z)
+
+        line1 = self.seg1.straight_line(start_point, end_pt1)
+        set_pts.extend(list(line1))
+
+        line2 = self.seg1.straight_line(end_pt1, end_pt2)
+        set_pts.extend(list(line2))
+
+        line3 = self.seg1.straight_line(end_pt2, end_pt3)
+        set_pts.extend(list(line3))
+
+        line4 = self.seg1.straight_line(end_pt3, end_pt4)
+        set_pts.extend(list(line4))
+
+        line5 = self.seg1.straight_line(end_pt4, end_pt5)
+        set_pts.extend(list(line5))
 # 
 #     def reset(self, start_cords = (0, 20, 10)):
 #         # move
