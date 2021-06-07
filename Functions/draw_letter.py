@@ -5,6 +5,7 @@ import user_input
 import pickle
 import os.path
 from os import path
+from letter_codes import Letters
 
 
 class Draw:
@@ -12,7 +13,7 @@ class Draw:
     This class draws the letters provided by the user input,
     taking into account workspace area and spacing between letters
     """
-    def __init__(self, list_of_chars, boundary_limits, letter_limits, gap, start_spacing):
+    def __init__(self, list_of_chars, boundary_limits, letter_limits, gap, start_spacing, segments=10):
         """
         Saves the input into a class attribute
         :param list_of_chars: Ex: ['a', 'p', 'p', 'l', 'e']
@@ -48,6 +49,7 @@ class Draw:
         self.start_coords = (10, 20)
 
         self.letter_width = letter_limits[0]
+        self.letter_ratio = letter_limits[1]
         self.letter_len = letter_limits[1]*self.letter_width
         self.letter_origin = letter_limits[2]
 
@@ -58,7 +60,29 @@ class Draw:
         self.start_spacing = start_spacing
 
         self.local_coords_dict = {}
-
+        
+        self.segments = segments
+        
+        self.code_letters()
+    
+    def code_letters(self):
+        run_letters = Letters(self.letter_width, self.letter_ratio, self.segments)
+        set_pts_H = run_letters.letter_H((0, 20, 8))
+        set_pts_A = run_letters.letter_A((0, 20, 8))
+        set_pts_R = run_letters.letter_R((0, 20, 8))
+        set_pts_B = run_letters.letter_B((0, 20, 8))
+        set_pts_T = run_letters.letter_T((0, 20, 8))
+        set_pts_M = run_letters.letter_M((0, 20, 8))
+        set_pts_O = run_letters.letter_O((0, 20, 8))
+    
+        np.save("Letters/letter_H", set_pts_H)
+        np.save("Letters/letter_A", set_pts_A)
+        np.save("Letters/letter_R", set_pts_R)
+        np.save("Letters/letter_B", set_pts_B)
+        np.save("Letters/letter_T", set_pts_T)
+        np.save("Letters/letter_M", set_pts_M)
+        np.save("Letters/letter_O", set_pts_O)
+    
     def _det_start_coords(self):
         """
         This method decides where to start drawing based on the mid points
@@ -104,7 +128,7 @@ class Draw:
         self.make_input_coords_dict()
         self.det_coords_all_letters()
         for i in range(0, self.num_of_chars):
-            start_coords = [self.all_coords_dict[i][1][0], self.all_coords_dict[i][1][1], 0]
+            start_coords = [self.all_coords_dict[i][1][0], self.all_coords_dict[i][1][1], self.letter_origin[2]]
             add_to_array = np.asarray(start_coords) - np.asarray(self.letter_origin)
             new_array = np.asarray(self.local_coords_dict[self.list_of_chars[i]]) + add_to_array
             # new_array = letter_array[i] + add_to_array
@@ -115,7 +139,7 @@ class Draw:
     def make_input_coords_dict(self):
         for letter in self.list_of_chars:
             print("LETTER: ", letter)
-            fname = "/Users/asar/Desktop/ROB521/Project/ROB521-ArmWrite/Letters/letter_{}.npy".format(letter)
+            fname = "/home/pi/ArmPi/Functions/Letters/letter_{}.npy".format(letter)
             if path.exists(fname):
                 char_coords = np.load(fname)
                 print("CHAR LOADED IN:", letter, fname)

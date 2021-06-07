@@ -7,8 +7,12 @@ import time
 import Camera
 from ArmIK.ArmMoveIK import *
 import HiwonderSDK.Board as Board
-from draw_letters import Draw
+from draw_letter import Draw
 import user_input
+import gui
+
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import Qt
 
 
 if sys.version_info.major == 2:
@@ -34,9 +38,11 @@ def loop_through_letters(new_dict):
         print(letter_start_pt)
         reset((letter_start_pt[0], letter_start_pt[1], letter_start_pt[2]+4))
         for row in new_dict[key][2]:  
-            print(new_dict[key][0], row)
+#             print(new_dict[key][0], row)
             # move
-            AK.setPitchRangeMoving(tuple(row), -90, -90, 0, 80)
+            result = AK.setPitchRangeMoving(tuple(row), -90, -90, -35, 80)
+            if result == False:
+                print(result)
             # delay
             time.sleep(0.2)
         #delay
@@ -57,16 +63,27 @@ def gripper_open():
     
 def gripper_close():
     Board.setBusServoPulse(1, servo1, 00)  # Holder closed
-    time.sleep(1)    
+    time.sleep(1)
+    
 
 if __name__ == '__main__':
-    word_to_draw = user_input.take_user_input()
-    workspace_limits = [(-15, 12), (15, 28)]
-    letter_bounding_box = (3.5, 1.6571, (0, 20, 8))
-    gap_btw_letters = 1
-    distance_from_boundaries = (4, 5)
+    app = QApplication([])
 
-    draw_robot = Draw(word_to_draw, workspace_limits, letter_bounding_box, gap_btw_letters, distance_from_boundaries)
+    interface = gui.GUI()
+
+    interface.show()
+
+    app.exec_()
+
+    word_to_draw = interface.save_text #user_input.take_user_input()
+    workspace_limits = [interface.ws_point1,  interface.ws_point2]
+    letter_bounding_box = (interface.font_width, interface.font_len_wid_ratio, (0, 20, 8))
+    gap_btw_letters = interface.gap
+    distance_from_boundaries = (interface.start_right, interface.start_up)
+    
+    segments = 10
+
+    draw_robot = Draw(word_to_draw, workspace_limits, letter_bounding_box, gap_btw_letters, distance_from_boundaries, segments)
 
     final_dict = draw_robot.transform_coords_to_start_pos()
 #     print("REPAIRED:", final_dict)

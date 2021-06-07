@@ -11,13 +11,13 @@ import HiwonderSDK.Board as Board
 
 
 class Letters:
-    def __init__(self, width, ratio):
-        self.AK = ArmIK()
+    def __init__(self, width, ratio, segments):
+#         self.AK = ArmIK()
         self.servo1 = 500
-        self.segments = 10
+        self.segments = segments
         self.width = width
         self.height = width * ratio
-        self.seg1 = Segmentation(4)
+        self.seg1 = Segmentation(self.segments)
         
     def letter_H(self, start_point):
         set_pts = []
@@ -32,7 +32,7 @@ class Letters:
         #AK.setPitchRangeMoving((end_pt1[0], end_pt1[1], end_pt[2]+5), -90, -90, 0, 100)
         end_pt2 = (end_pt1[0], end_pt1[1] + self.height/2, end_pt1[2])
         set_pts.append(list(end_pt2))
-        self.AK.setPitchRangeMoving(end_pt2, -90, -90, 0, 100)
+#         self.AK.setPitchRangeMoving(end_pt2, -90, -90, 0, 100)
         
         end_pt3 = (end_pt2[0] - self.width, end_pt2[1], end_pt2[2])
         point_list2 = self.seg1.straight_line(end_pt2, end_pt3)
@@ -40,7 +40,7 @@ class Letters:
         
         end_pt4 = (end_pt3[0], end_pt3[1] - self.height/2, end_pt3[2])
         set_pts.append(list(end_pt4))
-        self.AK.setPitchRangeMoving(end_pt4, -90, -90, 0, 100)
+#         self.AK.setPitchRangeMoving(end_pt4, -90, -90, 0, 100)
         
         end_pt5 = (end_pt4[0], end_pt4[1] + self.height, end_pt4[2])
         point_list3 = self.seg1.straight_line(end_pt4, end_pt5)
@@ -84,7 +84,7 @@ class Letters:
 
     def letter_A(self, start_point):
         set_pts = []
-        result1 = self.AK.setPitchRangeMoving(start_point, -90, -90, 0, 100)
+#         result1 = self.AK.setPitchRangeMoving(start_point, -90, -90, 0, 100)
         time.sleep(1)
         set_pts.append(list(start_point))
         
@@ -134,7 +134,7 @@ class Letters:
         set_pts.extend(point_list1)
         
         start_pt2 = end_pt1
-        end_pt2 = (start_point[0] - self.width/2, start_point[1], start_point[2])
+        end_pt2 = (start_point[0] - self.width/2, start_point[1] - self.height/2, start_point[2])
         point_list2 = self.seg1.straight_line(start_pt2, end_pt2)
         set_pts.extend(point_list2)
         
@@ -199,24 +199,24 @@ class Letters:
         set_pts.extend(list(line5))
 
         return np.asarray(set_pts)
-
-    def reset(self, start_cords = (0, 20, 10)):
-        # move
-        self.AK.setPitchRangeMoving(start_cords, -90, -90, 0, 100)
-        # delay
-        time.sleep(1)
-        
-    def gripper_open(self):    
-        Board.setBusServoPulse(1, self.servo1 - 200, 500)  # Open the paws and put down $
-        time.sleep(3)
-        
-    def gripper_close(self):
-        Board.setBusServoPulse(1, self.servo1, 100)  # Holder closed
-        time.sleep(1)
+# 
+#     def reset(self, start_cords = (0, 20, 10)):
+#         # move
+#         self.AK.setPitchRangeMoving(start_cords, -90, -90, 0, 100)
+#         # delay
+#         time.sleep(1)
+#         
+#     def gripper_open(self):    
+#         Board.setBusServoPulse(1, self.servo1 - 200, 500)  # Open the paws and put down $
+#         time.sleep(3)
+#         
+#     def gripper_close(self):
+#         Board.setBusServoPulse(1, self.servo1, 100)  # Holder closed
+#         time.sleep(1)
 
         
 if __name__ == '__main__':
-    run_letters = Letters(3, 1.67)
+    run_letters = Letters(3, 1.67, 5)
     set_pts_H = run_letters.letter_H((0, 20, 8))
     set_pts_A = run_letters.letter_A((0, 20, 8))
     set_pts_R = run_letters.letter_R((0, 20, 8))
