@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc30043b-fe83-46e4-84b5-87d047f69633" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ArmPi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ArmPi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Functions/letter_codes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions/letter_codes.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -217,8 +212,16 @@
       <workItem from="1594823947083" duration="1960000" />
       <workItem from="1594826037318" duration="1970000" />
       <workItem from="1595247219219" duration="13268000" />
-      <workItem from="1623036858787" duration="688000" />
+      <workItem from="1623036858787" duration="1170000" />
     </task>
+    <task id="LOCAL-00001" summary="Added name letters to letter code 'N', 'J'">
+      <created>1623037569369</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1623037569369</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,6 +237,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added name letters to letter code 'N', 'J'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added name letters to letter code 'N', 'J'" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
